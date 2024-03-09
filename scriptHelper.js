@@ -30,19 +30,19 @@ function validateInput(testInput) {
 }
  
 function formSubmission(document, list, pilot, copilot, fuelLevel, cargoMass) {
-    let numbers = [fuelLevel.value, cargoMass.value];
-    let strings = [Number(pilot.value), Number(copilot.value)];
+    let strings = [pilot.value, copilot.value];
+    let numbers = [Number(fuelLevel.value), Number(cargoMass.value)];
 
     for (const string in strings) {
         let result = validateInput(strings[string]);
-        if (result === "Is a Number" || result === "Empty") {
+        if (result === "Is a Number" || result === "") {
             console.log("Must enter a string, try again");
         }
     }
 
     for (const number in numbers) {
         let result = validateInput(numbers[number]); 
-        if (result === "Not a Number" || result === "Empty") {
+        if (result === "Not a Number" || result === "") {
             console.log("Must enter a number, try again");
         }
     }
