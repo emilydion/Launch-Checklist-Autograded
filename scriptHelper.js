@@ -31,17 +31,17 @@ function validateInput(testInput) {
  
 function formSubmission(document, list, pilot, copilot, fuelLevel, cargoMass) {
     let numbers = [fuelLevel.value, cargoMass.value];
-    let strings = [pilot.value, copilot.value];
+    let strings = [Number(pilot.value), Number(copilot.value)];
 
     for (const string in strings) {
-        let result = validateInput(string);
+        let result = validateInput(strings[string]);
         if (result === "Is a Number" || result === "Empty") {
             console.log("Must enter a string, try again");
         }
     }
 
     for (const number in numbers) {
-        let result = validateInput(number); 
+        let result = validateInput(numbers[number]); 
         if (result === "Not a Number" || result === "Empty") {
             console.log("Must enter a number, try again");
         }
@@ -71,22 +71,26 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoMass) {
         fuelStatus.innerHTML = "Fuel level too low for launch";
     }
 
-    if (cargoMass <= 10000 && fuelStatus >= 10000) {
-        launchStatus.style.color = "green"; 
+    if (fuelStatus >= 10000 && cargoMass <= 10000 ) {
         launchStatus.innerHTML = "Shuttle Is Ready for Launch";
+        launchStatus.style.color = "green"; 
     }
  }
  
  async function myFetch() {
-     let planetsReturned;
- 
-     planetsReturned = await fetch().then( function(response) {
-         });
+    let planetsReturned;
+
+    planetsReturned = await fetch("https://handlers.education.launchcode.org/static/planets.json").then( function(response) {
+        const jsonPromise = response.json();
+        jsonPromise.then( function(json) {
+        });
+    });
  
      return planetsReturned;
  }
  
  function pickPlanet(planets) {
+
  }
  
  module.exports.addDestinationInfo = addDestinationInfo;
