@@ -33,6 +33,13 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoMass) {
     let strings = [pilot.value, copilot.value];
     let numbers = [Number(fuelLevel.value), Number(cargoMass.value)];
 
+    //need the actual values of these elements - I'm redefining the 
+    //original variables but this can be done differently
+    pilot = pilot.value
+    copilot = copilot.value
+    fuelLevel = Number(fuelLevel.value)
+    cargoMass = Number(cargoMass.value)
+
     for (const string in strings) {
         let result = validateInput(strings[string]);
         if (result === "Is a Number" || result === "") {
@@ -56,16 +63,19 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoMass) {
 
     pilotStatus.innerHTML = `Pilot ${pilot} is ready for launch`;
     copilotStatus.innerHTML = `Co-pilot ${copilot} is ready for launch`;
+
+    //make faultyItems list visible whether shuttle is available to launch or not
+    list.style.visibility = "visible";
     
     if (cargoMass > 10000) {
-        faultyItems.style.visibility = "visible"; 
+        //faultyItems.style.visibility = "visible"; 
         launchStatus.style.color = "red"; 
         launchStatus.innerHTML = "Shuttle Not Ready for Launch";
         cargoStatus.innerHTML = "Cargo mass too heavy for launch"; 
     } 
 
     if (fuelLevel < 10000) {
-        faultyItems.style.visibility = "visible"; 
+        //faultyItems.style.visibility = "visible"; 
         launchStatus.style.color = "red";
         launchStatus.innerHTML = "Shuttle Not Ready for Launch"; 
         fuelStatus.innerHTML = "Fuel level too low for launch";
