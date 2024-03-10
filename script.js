@@ -4,7 +4,9 @@ window.addEventListener("load", function() {
     //let document = window; 
     let form = document.querySelector("form"); 
     form.addEventListener("submit", function(event) {
-        alert("submitted"); 
+        alert("submitted");
+        //add preventDefault() to prevent window from reloading
+        event.preventDefault(); 
         let list = document.getElementById("faultyItems");
         let h2 = document.getElementById("launchStatus");
         let pilot = document.querySelector("input[name=pilotName]");
