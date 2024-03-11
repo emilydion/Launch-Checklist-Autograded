@@ -53,20 +53,24 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoMass) {
     for (const string in strings) {
         let result = validateInput(strings[string]);
         if (result === "Empty") {
-            alert("All fields must be filled!");
+            //alert("All fields must be filled!");
+            console.log("All fields must be filled!");
         }
         if (result === "Is a Number") {
-            alert("Must enter a valid string, try again!");
+            //alert("Must enter a valid string, try again!");
+            console.log("Must enter a valid string, try again!");
         }
     }
 
     for (const number in numbers) {
         let result = validateInput(numbers[number]); 
         if (result === "Empty") {
-            alert("All fields must be filled!");
+            //alert("All fields must be filled!");
+            console.log("All fields must be filled!");
         }
         if (result === "Not a Number") {
-            alert("Must enter a valid number, try again");
+            //alert("Must enter a valid number, try again");
+            console.log("Must enter a valid number, try again!"); 
         }
     }
 
@@ -81,31 +85,26 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoMass) {
     copilotStatus.innerHTML = `Co-pilot ${copilot} is ready for launch`;
 
     list.style.visibility = "visible"; 
-    
+
+    if (cargoMass <= 10000 && fuelLevel >= 10000) {
+        launchStatus.innerHTML = "Shuttle Is Ready for Launch";
+        launchStatus.style.color = "green"; 
+    }
     if (cargoMass > 10000) {
         launchStatus.style.color = "red"; 
         launchStatus.innerHTML = "Shuttle Not Ready for Launch";
         cargoStatus.innerHTML = "Cargo mass too heavy for launch"; 
-    } else if (fuelLevel < 10000) {
+    }
+    if (fuelLevel < 10000) {
         launchStatus.style.color = "red";
         launchStatus.innerHTML = "Shuttle Not Ready for Launch"; 
         fuelStatus.innerHTML = "Fuel level too low for launch";
-    } else {
-        launchStatus.innerHTML = "Shuttle Is Ready for Launch";
-        launchStatus.style.color = "green"; 
     }
  }
  
  async function myFetch() {
-    let planetsReturned;
-
-    planetsReturned = await fetch("https://handlers.education.launchcode.org/static/planets.json").then( function(response) {
-        const jsonPromise = response.json();
-        jsonPromise.then( function(json) {
-        });
-    });
- 
-     return planetsReturned;
+    let planetsReturned = await fetch("https://handlers.education.launchcode.org/static/planets.json")
+     return planetsReturned.json();
  }
  
  function pickPlanet(planets) {
