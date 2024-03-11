@@ -15,6 +15,18 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
                  </ol>
                  <img src="">
     */
+   const missionTarget = document.getElementById("missionTarget"); 
+   missionTarget.innerHTML = `
+        <h2>Mission Destination</h2>
+        <ol>
+            <li>Name: ${name}</li>
+            <li>Diameter: ${diameter}</li>
+            <li>Star: ${star}</li>
+            <li>Distance from Earth: ${distance}</li>
+            <li>Number of Moons: ${moons}</li>
+        </ol>
+        <img src="${imageUrl}">
+   `;
  }
  
 function validateInput(testInput) {
@@ -33,17 +45,28 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoMass) {
     let strings = [pilot.value, copilot.value];
     let numbers = [Number(fuelLevel.value), Number(cargoMass.value)];
 
+    pilot = pilot.value
+    copilot = copilot.value
+    fuelLevel = Number(fuelLevel.value)
+    cargoMass = Number(cargoMass.value)
+
     for (const string in strings) {
         let result = validateInput(strings[string]);
-        if (result === "Is a Number" || result === "") {
-            console.log("Must enter a string, try again");
+        if (result === "Empty") {
+            alert("All fields must be filled!");
+        }
+        if (result === "Is a Number") {
+            alert("Must enter a valid string, try again!");
         }
     }
 
     for (const number in numbers) {
         let result = validateInput(numbers[number]); 
-        if (result === "Not a Number" || result === "") {
-            console.log("Must enter a number, try again");
+        if (result === "Empty") {
+            alert("All fields must be filled!");
+        }
+        if (result === "Not a Number") {
+            alert("Must enter a valid number, try again");
         }
     }
 
@@ -56,22 +79,18 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoMass) {
 
     pilotStatus.innerHTML = `Pilot ${pilot} is ready for launch`;
     copilotStatus.innerHTML = `Co-pilot ${copilot} is ready for launch`;
+
+    list.style.visibility = "visible"; 
     
     if (cargoMass > 10000) {
-        faultyItems.style.visibility = "visible"; 
         launchStatus.style.color = "red"; 
         launchStatus.innerHTML = "Shuttle Not Ready for Launch";
         cargoStatus.innerHTML = "Cargo mass too heavy for launch"; 
-    } 
-
-    if (fuelLevel < 10000) {
-        faultyItems.style.visibility = "visible"; 
+    } else if (fuelLevel < 10000) {
         launchStatus.style.color = "red";
         launchStatus.innerHTML = "Shuttle Not Ready for Launch"; 
         fuelStatus.innerHTML = "Fuel level too low for launch";
-    }
-
-    if (fuelStatus >= 10000 && cargoMass <= 10000 ) {
+    } else {
         launchStatus.innerHTML = "Shuttle Is Ready for Launch";
         launchStatus.style.color = "green"; 
     }
@@ -90,7 +109,8 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoMass) {
  }
  
  function pickPlanet(planets) {
-
+    let selection = Math.floor(Math.random() * planets.length); 
+    return planets[selection]; 
  }
  
  module.exports.addDestinationInfo = addDestinationInfo;
