@@ -40,46 +40,54 @@ function validateInput(testInput) {
         return "Is a Number"; 
     }
 }
- 
+
+
 function formSubmission(document, list, pilot, copilot, fuelLevel, cargoMass) {
-    let strings = [pilot.value, copilot.value];
-    let numbers = [Number(fuelLevel.value), Number(cargoMass.value)];
+    // let strings = [pilot.value, copilot.value];
+    // let numbers = [Number(fuelLevel.value), Number(cargoMass.value)];
 
-    // pilotValue = pilot.value;
-    // copilotValue = copilot.value; 
-    // fuelLevelValue = Number(fuelLevel.value); 
-    // cargoMass = Number(cargoMass.value); 
+    // for (const string in strings) {
+    //     let result = validateInput(strings[string]);
+    //     if (result === "Empty") {
+    //         alert("All fields must be filled!");
+    //         console.log("All fields must be filled!");
+    //     }
+    //     if (result === "Is a Number") {
+    //         alert("Must enter a valid string, try again!");
+    //         console.log("Must enter a valid string, try again!");
+    //     }
+    // }
 
-    // pilot = pilot.value
-    // copilot = copilot.value
-    // fuelLevel = Number(fuelLevel.value)
-    // cargoMass = Number(cargoMass.value)
+    // for (const number in numbers) {
+    //     let result = validateInput(numbers[number]); 
+    //     if (result === "Empty") {
+    //         alert("All fields must be filled!");
+    //         console.log("All fields must be filled!");
+    //     }
+    //     if (result === "Not a Number") {
+    //         alert("Must enter a valid number, try again");
+    //         console.log("Must enter a valid number, try again!"); 
+    //     }
+    // }
 
-    for (const string in strings) {
-        let result = validateInput(strings[string]);
-        if (result === "Empty") {
-            //alert("All fields must be filled!");
-            console.log("All fields must be filled!");
-        }
-        if (result === "Is a Number") {
-            //alert("Must enter a valid string, try again!");
-            console.log("Must enter a valid string, try again!");
-        }
+    let pilotValidation, copilotValidation, fuelLevelValidation, cargoMassValidation; 
+    pilotValidation = validateInput(pilot);
+    copilotValidation = validateInput(copilot); 
+    fuelLevelValidation = validateInput(fuelLevel); 
+    cargoMassValidation = validateInput(cargoMass); 
+
+    if (pilotValidation === "Empty" || copilotValidation === "Empty" || fuelLevelValidation === "Empty" || cargoMassValidation === "Empty") {
+        alert("All fields must be filled!"); 
+    }
+    
+    if (pilotValidation === "Is a Number" || copilotValidation === "Is a Number") {
+        alert("Pilot and Copilot fields must be valid strings!"); 
+    }
+    
+    if (fuelLevelValidation === "Not a Number" || cargoMassValidation === "Not a Number") {
+        alert("Fuel Level and Cargo Mass fields must be valid numbers!");
     }
 
-    for (const number in numbers) {
-        let result = validateInput(numbers[number]); 
-        if (result === "Empty") {
-            //alert("All fields must be filled!");
-            console.log("All fields must be filled!");
-        }
-        if (result === "Not a Number") {
-            //alert("Must enter a valid number, try again");
-            console.log("Must enter a valid number, try again!"); 
-        }
-    }
-
-    //const faultyItems = document.getElementById("faultyItems");
     const pilotStatus = document.getElementById("pilotStatus"); 
     const copilotStatus = document.getElementById("copilotStatus");
     const launchStatus = document.getElementById("launchStatus"); 
