@@ -12,7 +12,7 @@ window.addEventListener("load", function() {
         let fuelLevel = document.querySelector("input[name=fuelLevel]");
         let cargoMass = document.querySelector("input[name=cargoMass]");
 
-        formSubmission(document, list, pilot, copilot, fuelLevel, cargoMass);
+        formSubmission(document, list, pilot.value, copilot.value, fuelLevel.value, cargoMass.value);
 
         event.preventDefault(); 
     });

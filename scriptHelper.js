@@ -45,10 +45,15 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoMass) {
     let strings = [pilot.value, copilot.value];
     let numbers = [Number(fuelLevel.value), Number(cargoMass.value)];
 
+    // pilotValue = pilot.value;
+    // copilotValue = copilot.value; 
+    // fuelLevelValue = Number(fuelLevel.value); 
+    // cargoMass = Number(cargoMass.value); 
+
     // pilot = pilot.value
     // copilot = copilot.value
-    //fuelLevel = Number(fuelLevel.value)
-    //cargoMass = Number(cargoMass.value)
+    // fuelLevel = Number(fuelLevel.value)
+    // cargoMass = Number(cargoMass.value)
 
     for (const string in strings) {
         let result = validateInput(strings[string]);
